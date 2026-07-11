@@ -11,7 +11,10 @@ export async function GET(req: Request) {
   const pageNumber = Math.max(0, page - 1);
 
   const result = await fetchPendingDrafts(undefined, undefined, pageSize, pageNumber, search, status);
-      return NextResponse.json({ error: result.error ?? 'Failed to fetch drafts' }, { status: 500 });
+    
+    // Εδώ είναι η διόρθωση:
+    if (result.error) {
+      return NextResponse.json({ error: result.error }, { status: 500 });
     }
 
     return NextResponse.json({ data: result.data ?? [], count: result.count ?? 0 });
