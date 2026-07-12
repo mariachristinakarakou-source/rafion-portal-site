@@ -4,221 +4,247 @@ import { motion, useReducedMotion } from 'framer-motion';
 const engagementSteps = [
   {
     title: 'Strategic Audit',
-    description:
-      'We map your sourcing workflow, diligence standards, and governance controls so the operating model is aligned from day one.',
+    description: 'Analyze datasets and surface the highest-conviction opportunities.',
   },
   {
     title: 'Bespoke Agent Development',
-    description:
-      'We build secure agents around your proprietary playbooks, approvals, and data sources for reliable, low-friction execution.',
+    description: 'Build custom autonomous agents tailored to your firm’s operating rhythm.',
   },
   {
     title: 'Continuous Optimization',
-    description:
-      'We refine signal quality, coverage, and decision support over time so your team keeps compounding advantage.',
+    description: 'Refine performance as market conditions evolve and your strategy matures.',
   },
 ];
 
-const safeguards = [
-  'Private, tenant-isolated retrieval layers',
-  'Role-aware access controls and auditability',
-  'Sovereign deployment options for sensitive data',
+const ragBenefits = [
+  {
+    title: 'Proprietary Insight',
+    description: 'Turn internal knowledge into structured, decision-ready intelligence.',
+  },
+  {
+    title: 'Absolute Data Sovereignty',
+    description: 'Keep sensitive firm data protected with governance-first infrastructure.',
+  },
+  {
+    title: 'Precision at Scale',
+    description: 'Deliver fast, relevant outputs across the organization without compromising quality.',
+  },
 ];
 
-export default function Home() {
+const trustLogos = ['NEXUS', 'AURORA', 'MARC', 'LUMEN', 'QUANT'];
+
+const teamImage = `data:image/svg+xml;utf8,${encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+    <rect width="900" height="900" rx="48" fill="#050505"/>
+    <rect x="70" y="70" width="760" height="760" rx="36" fill="#111111" stroke="#2a2a2a" stroke-width="2"/>
+    <circle cx="450" cy="360" r="180" fill="url(#g)"/>
+    <circle cx="390" cy="330" r="20" fill="#f5f5f5"/>
+    <circle cx="510" cy="330" r="20" fill="#f5f5f5"/>
+    <path d="M340 470c30 55 190 55 220 0" stroke="#f5f5f5" stroke-width="18" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="g" x1="220" y1="180" x2="700" y2="660" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#ffffff" stop-opacity="0.95"/>
+        <stop offset="1" stop-color="#6b7280" stop-opacity="0.6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+`)}`;
+
+type RevealBlockProps = {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+};
+
+function RevealBlock({ children, className, delay = 0 }: RevealBlockProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  const reveal = {
-    hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0 },
-  };
+  return (
+    <motion.div
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55, ease: 'easeOut', delay }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
+function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
+  return (
+    <div className="max-w-2xl">
+      <p className="text-xs uppercase tracking-[0.35em] text-gray-500">{eyebrow}</p>
+      <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">{title}</h2>
+      <p className="mt-5 text-lg leading-8 text-gray-400">{copy}</p>
+    </div>
+  );
+}
+
+export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-black text-white selection:bg-white selection:text-black">
       <nav className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <span className="text-sm font-semibold uppercase tracking-[0.35em] text-gray-300">Rafion AI</span>
-          <div className="flex items-center gap-6 text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
-            <a href="#engagement" className="transition hover:text-white">
-              Engagement
-            </a>
-            <a href="#rag-advantage" className="transition hover:text-white">
-              RAG Advantage
-            </a>
-            <a
-              href="#hero"
-              className="rounded-full border border-white/20 px-4 py-2 text-white transition hover:bg-white hover:text-black"
-            >
-              Request a Demo
-            </a>
-          </div>
+          <a
+            href="#hero"
+            className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-white hover:text-black"
+          >
+            Request a Demo
+          </a>
         </div>
       </nav>
 
       <section id="hero" className="relative mx-auto flex max-w-7xl flex-col px-6 pb-20 pt-24 md:pt-32 lg:pt-36">
-        <div className="absolute inset-x-0 top-0 -z-10 mx-auto h-[34rem] max-w-6xl rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_35%),radial-gradient(circle_at_80%_20%,_rgba(99,102,241,0.24),_transparent_28%),linear-gradient(120deg,_rgba(255,255,255,0.06),_rgba(255,255,255,0.02))] blur-3xl" />
+        <div className="absolute inset-x-0 top-0 -z-10 mx-auto h-[34rem] max-w-6xl rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.2),_transparent_35%),radial-gradient(circle_at_80%_20%,_rgba(99,102,241,0.25),_transparent_28%),linear-gradient(120deg,_rgba(255,255,255,0.07),_rgba(255,255,255,0.02))] blur-3xl" />
         <div className="absolute inset-x-0 top-10 -z-10 mx-auto h-[24rem] max-w-5xl rounded-full bg-gradient-to-br from-white/10 via-fuchsia-500/10 to-cyan-500/10 blur-[120px]" />
 
         <div className="max-w-4xl">
-          <motion.p
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.25 }}
-            variants={reveal}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="mb-6 text-xs uppercase tracking-[0.35em] text-gray-500"
-          >
-            Institutional Deal Intelligence
-          </motion.p>
-          <motion.h1
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.25 }}
-            variants={reveal}
-            transition={{ duration: 0.55, ease: 'easeOut', delay: 0.05 }}
-            className="text-4xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl lg:text-7xl"
-          >
-            Institutional-Grade Deal Sourcing: We Architect Your Autonomous Growth.
-          </motion.h1>
-          <motion.p
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.25 }}
-            variants={reveal}
-            transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
-            className="mt-8 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl"
-          >
-            We combine disciplined sourcing workflows, proprietary data context, and autonomous execution to help modern firms move faster without compromising control.
-          </motion.p>
-          <motion.div
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.25 }}
-            variants={reveal}
-            transition={{ duration: 0.55, ease: 'easeOut', delay: 0.15 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <a
-              href="#engagement"
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:bg-gray-200"
-            >
-              Request a Demo
-            </a>
-            <a
-              href="#rag-advantage"
-              className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-gray-200 transition duration-300 hover:border-white/35 hover:text-white"
-            >
-              See the RAG Advantage
-            </a>
-          </motion.div>
+          <RevealBlock delay={0.02}>
+            <p className="mb-6 text-xs uppercase tracking-[0.35em] text-gray-500">Institutional Deal Intelligence</p>
+          </RevealBlock>
+          <RevealBlock delay={0.06}>
+            <h1 className="text-4xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl lg:text-7xl">
+              Institutional-Grade Deal Sourcing: We Architect Your Autonomous Growth.
+            </h1>
+          </RevealBlock>
+          <RevealBlock delay={0.1}>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
+              We deploy custom-built autonomous agents to qualify leads and secure meetings, aligning technology with your firm’s DNA.
+            </p>
+          </RevealBlock>
+          <RevealBlock delay={0.14}>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="#engagement"
+                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:bg-gray-200"
+              >
+                Request a Demo
+              </a>
+              <a
+                href="#rag-advantage"
+                className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-gray-200 transition duration-300 hover:border-white/35 hover:text-white"
+              >
+                Explore the Architecture
+              </a>
+            </div>
+          </RevealBlock>
         </div>
 
-        <motion.div
-          initial={prefersReducedMotion ? false : 'hidden'}
-          whileInView={prefersReducedMotion ? undefined : 'visible'}
-          viewport={{ once: true, amount: 0.2 }}
-          variants={reveal}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-          className="mt-16 grid gap-4 md:grid-cols-3"
-        >
+        <RevealBlock delay={0.18} className="mt-16 grid gap-4 md:grid-cols-3">
           {[
-            ['Autonomous workflows', 'From market mapping to prioritization, the pipeline runs with institutional discipline.'],
-            ['Proprietary context', 'Every signal is grounded in your own documents, playbooks, and historical decisions.'],
-            ['Secure operations', 'Built for confidential data with governance-first architecture.'],
+            ['Autonomous workflows', 'Convert pipeline activity into high-signal execution with disciplined automation.'],
+            ['Proprietary context', 'Ground every decision in your firm’s private data and proven playbooks.'],
+            ['Secure operations', 'Deploy with governance-first controls for sensitive deal environments.'],
           ].map(([title, copy]) => (
             <div key={title} className="rounded-2xl border border-white/10 bg-zinc-950/70 p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/20">
               <h2 className="text-lg font-semibold text-white">{title}</h2>
               <p className="mt-3 text-sm leading-7 text-gray-400">{copy}</p>
             </div>
           ))}
-        </motion.div>
+        </RevealBlock>
       </section>
 
       <section id="engagement" className="border-t border-white/10 py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.2 }}
-            variants={reveal}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="max-w-2xl"
-          >
-            <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Engagement Model</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">
-              A deliberate three-step approach to autonomous growth.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-gray-400">
-              Each phase is designed to turn strategy into reliable action without overextending your team.
-            </p>
-          </motion.div>
+          <RevealBlock>
+            <SectionHeading
+              eyebrow="Engagement Model"
+              title="Our Engagement Model"
+              copy="A disciplined approach to turning proprietary context into reliable autonomous execution."
+            />
+          </RevealBlock>
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {engagementSteps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={prefersReducedMotion ? false : 'hidden'}
-                whileInView={prefersReducedMotion ? undefined : 'visible'}
-                viewport={{ once: true, amount: 0.2 }}
-                variants={reveal}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
-                className="rounded-3xl border border-white/10 bg-zinc-950/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-white/20"
-              >
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-500">0{index + 1}</p>
-                <h3 className="mt-5 text-2xl font-semibold text-white">{step.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-gray-400">{step.description}</p>
-              </motion.div>
+              <RevealBlock key={step.title} delay={0.05 * index}>
+                <div className="rounded-3xl border border-white/10 bg-zinc-950/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-white/20">
+                  <p className="text-xs uppercase tracking-[0.35em] text-gray-500">0{index + 1}</p>
+                  <h3 className="mt-5 text-2xl font-semibold text-white">{step.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-gray-400">{step.description}</p>
+                </div>
+              </RevealBlock>
             ))}
           </div>
         </div>
       </section>
 
       <section id="rag-advantage" className="border-t border-white/10 bg-zinc-950/60 py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <motion.div
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.2 }}
-            variants={reveal}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            <p className="text-xs uppercase tracking-[0.35em] text-gray-500">RAG Advantage</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">
-              Secure, proprietary retrieval architecture with full data sovereignty.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-gray-400">
-              Our retrieval layer is purpose-built for sensitive deal environments, ensuring your private data stays protected while the system delivers highly relevant outputs.
-            </p>
-            <ul className="mt-8 space-y-4 text-sm leading-7 text-gray-300">
-              {safeguards.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 h-2.5 w-2.5 rounded-full bg-white" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+        <div className="mx-auto max-w-7xl px-6">
+          <RevealBlock>
+            <SectionHeading
+              eyebrow="RAG Advantage"
+              title="Your Data, Secured and Augmented."
+              copy="Deliver context-rich, compliant outputs that preserve the integrity of your proprietary information."
+            />
+          </RevealBlock>
 
-          <motion.div
-            initial={prefersReducedMotion ? false : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.2 }}
-            variants={reveal}
-            transition={{ duration: 0.55, ease: 'easeOut', delay: 0.08 }}
-            className="rounded-3xl border border-white/10 bg-black p-8"
-          >
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-500">Operating principle</p>
-            <p className="mt-5 text-2xl font-semibold text-white">
-              The model sees context, but never at the cost of ownership.
-            </p>
-            <p className="mt-4 text-sm leading-7 text-gray-400">
-              We protect the underlying corpus, enforce access boundaries, and keep your institutional knowledge under your control.
-            </p>
-            <div className="mt-8 rounded-2xl border border-white/10 bg-zinc-950/70 p-6">
-              <p className="text-xs uppercase tracking-[0.35em] text-gray-500">Data sovereignty</p>
-              <p className="mt-3 text-lg font-medium text-white">Confidentiality, auditability, and governance remain first-class design principles.</p>
-            </div>
-          </motion.div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {ragBenefits.map((benefit, index) => (
+              <RevealBlock key={benefit.title} delay={0.05 * index}>
+                <div className="rounded-3xl border border-white/10 bg-black p-8">
+                  <h3 className="text-xl font-semibold text-white">{benefit.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-gray-400">{benefit.description}</p>
+                </div>
+              </RevealBlock>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <RevealBlock>
+            <SectionHeading
+              eyebrow="Trusted Infrastructure"
+              title="Trusted Infrastructure"
+              copy="Operationally resilient systems and strategic partnerships that support institutional-grade execution."
+            />
+          </RevealBlock>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {trustLogos.map((logo, index) => (
+              <RevealBlock key={logo} delay={0.04 * index}>
+                <div className="rounded-2xl border border-white/10 bg-zinc-950/70 px-6 py-5 text-center text-sm font-semibold uppercase tracking-[0.35em] text-gray-500">
+                  {logo}
+                </div>
+              </RevealBlock>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <RevealBlock>
+            <SectionHeading
+              eyebrow="The Architects"
+              title="The Architects"
+              copy="A team of operators and technologists with deep experience driving high-stakes institutional workflows."
+            />
+          </RevealBlock>
+
+          <div className="mt-12 grid gap-8 rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 lg:grid-cols-[0.9fr_1.1fr] lg:p-10">
+            <RevealBlock delay={0.04}>
+              <img src={teamImage} alt="Portrait placeholder of the Rafion AI team" className="h-full min-h-[300px] w-full rounded-[1.5rem] object-cover" />
+            </RevealBlock>
+            <RevealBlock delay={0.08}>
+              <div className="flex h-full flex-col justify-center">
+                <p className="text-sm uppercase tracking-[0.35em] text-gray-500">Institutional Expertise</p>
+                <h3 className="mt-4 text-3xl font-semibold text-white">Built for firms that demand precision, control, and speed.</h3>
+                <p className="mt-5 text-lg leading-8 text-gray-400">
+                  Our architects combine automation, domain fluency, and secure systems design to help growth-minded firms move faster without sacrificing rigor.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-gray-300">Private Market Fluency</span>
+                  <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-gray-300">Secure Infrastructure</span>
+                  <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-gray-300">Autonomous Workflow Design</span>
+                </div>
+              </div>
+            </RevealBlock>
+          </div>
         </div>
       </section>
     </main>
