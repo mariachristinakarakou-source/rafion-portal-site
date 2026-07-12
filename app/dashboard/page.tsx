@@ -12,6 +12,8 @@ import AuditLog from '@/components/AuditLog';
 import { fetchPendingDrafts, getApprovalStats } from '@/lib/actions';
 import { PendingDraft } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Dashboard | Rafion AI',
   description: 'Review pending AI-generated investment analysis drafts',

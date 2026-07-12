@@ -11,7 +11,7 @@ import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { PendingDraft, FetchDraftsResult } from './types';
 
-export const DraftInputSchema = z.object({
+const DraftInputSchema = z.object({
   id: z.string().uuid().optional(),
   user_id: z.string().uuid(),
   firm_id: z.string().uuid(),
@@ -41,7 +41,7 @@ export const DraftInputSchema = z.object({
 
 export type DraftInput = z.infer<typeof DraftInputSchema>;
 
-export const PendingDraftSchema = DraftInputSchema.extend({
+const PendingDraftSchema = DraftInputSchema.extend({
   id: z.string().uuid(),
   created_at: z.string(),
   updated_at: z.string(),
